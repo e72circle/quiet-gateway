@@ -87,19 +87,14 @@ const Index = () => {
 
       {/* Main chat container - flex column */}
       <div className="flex-1 flex flex-col max-w-2xl w-full mx-auto min-h-0">
-        {/* Top spacer - shrinks to 0 when messages exist */}
+        {/* Top spacer - shrinks to 0 instantly when messages exist */}
         <div 
-          className="transition-all duration-700 ease-out"
           style={{ flex: hasMessages ? '0 0 0px' : '1 1 0px' }}
         />
 
-        {/* Messages area - grows when messages exist */}
-        <div 
-          className={`overflow-y-auto ${
-            hasMessages ? 'flex-1 opacity-100' : 'flex-none h-0 opacity-0'
-          }`}
-        >
-          <div className="flex flex-col justify-end min-h-full pb-4">
+        {/* Messages area - at top, grows downward */}
+        {hasMessages && (
+          <div className="overflow-y-auto flex-1 pt-4">
             <div className="space-y-3 px-1">
               {messages.map((message) => (
                 <ChatMessage
@@ -110,7 +105,7 @@ const Index = () => {
               ))}
             </div>
           </div>
-        </div>
+        )}
 
         {/* Input area - always at natural position */}
         <div className="py-6 flex flex-col items-center flex-shrink-0">
@@ -124,9 +119,8 @@ const Index = () => {
           <HintButtons visible={showHints} onHintClick={handleHintClick} />
         </div>
 
-        {/* Bottom spacer - shrinks to 0 when messages exist */}
+        {/* Bottom spacer - shrinks to 0 instantly when messages exist */}
         <div 
-          className="transition-all duration-700 ease-out"
           style={{ flex: hasMessages ? '0 0 0px' : '1 1 0px' }}
         />
         </div>
