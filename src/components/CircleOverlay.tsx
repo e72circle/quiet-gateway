@@ -56,11 +56,15 @@ const CircleOverlay = ({ isOpen, activeCircle, onSelectCircle, onClose }: Circle
                     onSelectCircle(circle.id);
                     onClose();
                   }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-150 text-left ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 text-left ${
                     isActive 
-                      ? 'bg-muted/60' 
+                      ? 'bg-muted' 
                       : 'hover:bg-muted/40'
                   }`}
+                  style={{
+                    boxShadow: isActive ? '0 1px 3px rgba(0, 0, 0, 0.08)' : 'none',
+                    border: isActive ? '1px solid rgba(0, 0, 0, 0.06)' : '1px solid transparent',
+                  }}
                 >
                   <Icon 
                     className={`w-4 h-4 ${isActive ? 'text-foreground' : 'text-muted-foreground'}`} 
@@ -68,9 +72,8 @@ const CircleOverlay = ({ isOpen, activeCircle, onSelectCircle, onClose }: Circle
                   />
                   <span 
                     className={`text-sm tracking-tight ${
-                      isActive ? 'text-foreground' : 'text-muted-foreground'
+                      isActive ? 'text-foreground font-medium' : 'text-muted-foreground'
                     }`}
-                    style={{ fontWeight: isActive ? 450 : 400 }}
                   >
                     {circle.name}
                   </span>
