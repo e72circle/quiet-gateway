@@ -47,9 +47,6 @@ const Index = () => {
 
   return (
     <div className="gradient-backdrop min-h-screen flex relative overflow-hidden">
-      {/* Circle Switcher - mobile only */}
-      <CircleSwitcher onClick={() => setIsOverlayOpen(true)} />
-      
       {/* Circle Sidebar/Overlay */}
       <CircleOverlay
         isOpen={isOverlayOpen}
@@ -61,13 +58,16 @@ const Index = () => {
       {/* Main content wrapper */}
       <div 
         className={`
-          flex-1 min-h-screen flex flex-col px-6 transition-transform duration-300 ease-out
+          flex-1 min-h-screen flex flex-col px-6 transition-transform duration-300 ease-out relative
           md:transition-none md:transform-none
         `}
         style={{
           transform: isOverlayOpen ? 'translateX(16rem)' : 'translateX(0)',
         }}
       >
+        {/* Circle Switcher - inside the sliding container so it moves with content */}
+        <CircleSwitcher onClick={() => setIsOverlayOpen(true)} isOverlayOpen={isOverlayOpen} />
+        
         {/* Wordmark - fixed at top */}
         <div className="pt-12 flex justify-center flex-shrink-0">
         <div className="flex items-center gap-1.5">
@@ -95,7 +95,7 @@ const Index = () => {
 
         {/* Messages area - grows when messages exist */}
         <div 
-          className={`overflow-y-auto transition-all duration-500 ${
+          className={`overflow-y-auto ${
             hasMessages ? 'flex-1 opacity-100' : 'flex-none h-0 opacity-0'
           }`}
         >
